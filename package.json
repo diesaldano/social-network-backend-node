@@ -10,14 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CodingCarlos/proyecto-backend-node-platzi.git"
+    "url": "git+https://github.com/dsaldano/social-network.git"
   },
   "author": "Diego Saldaño <diefesal@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/CodingCarlos/proyecto-backend-node-platzi/issues"
   },
-  "homepage": "https://github.com/CodingCarlos/proyecto-backend-node-platzi#readme",
+  "homepage": "https://github.com/dsaldano/social-network.git#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "express": "^4.17.1",
