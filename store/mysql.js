@@ -36,8 +36,9 @@ function handleCon() {
 
 handleCon();
 
-function list(list, id) {
-  Promise((resolve, reject) => {
+/** Obtener todos los usuarios de la tabla */
+function list(table) {
+  return  new Promise((resolve, reject) => {
     connection.query(`SELECT * FROM ${table}`, (err, data) => {
       // connection.query(`SELECT * FROM ${table} WHERE id = '${id}'`, (err, data) => {
       if (err) return reject(err)
@@ -45,7 +46,37 @@ function list(list, id) {
     })
   })
 }
+/**Obtener usuario de una tabla por id */
+function get(table, id) {
+  return  new Promise((resolve, reject) => {
+      connection.query(`SELECT * FROM ${table} WHERE id = '${id}'`, (err, data) => {
+      if (err) return reject(err)
+      resolve(data)
+    })
+  })
+}
+/** Insert in data */
+function insert(table, data) {
+  return  new Promise((resolve, reject) => {
+      connection.query(`INSERT INTO${table}SET?`, data, (err, result) => {
+      if (err) return reject(err)
+      resolve(result)
+    })
+  })
+}
+
+function update(table, data) {
+  return  new Promise((resolve, reject) => {
+      connection.query(`UPDATE${table}SET?WHERE id=?`, [data, data.id], (err, result) => {
+      if (err) return reject(err);
+      resolve(result);
+    })
+  })
+}
 
 module.exports = {
-  list
+  list,
+  get,
+  insert,
+  update
 }
