@@ -64,7 +64,7 @@ function insert(table, data) {
     })
   })
 }
-
+/**Actualizar db */
 function update(table, data) {
   return  new Promise((resolve, reject) => {
       connection.query(`UPDATE${table}SET?WHERE id=?`, [data, data.id], (err, result) => {
@@ -74,9 +74,29 @@ function update(table, data) {
   })
 }
 
+function upsert(table, data) {
+  if(data && data.id){
+    return update(table, data);
+  } else {
+    return insert(table, data);
+  }
+}
+
+function query(table, query) {
+  return  new Promise((resolve, reject) => {
+      connection.query(`SELECT*FROM${table}WHERE?`, query, (err, res) => {
+      if (err) return reject(err);
+      resolve(res[0] || null);
+    })
+  })
+}
+
+
 module.exports = {
   list,
   get,
   insert,
-  update
+  update,
+  upsert, 
+  query
 }
