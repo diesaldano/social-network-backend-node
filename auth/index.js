@@ -17,35 +17,40 @@ function verify(token) {
 }
 
 const check = {
-  own: function (req, owner) {
-    const decoded = decodedHeader(req);
+  own: function(req, owner) {
+    const decoded = decodeHeader(req);
     console.log(decoded);
 
     if (decoded.id !== owner) {
-      throw error('No puedes realizar esto', 401);
+      throw error('No puedes hacer esto', 401);
     }
+  },
+
+  logged: function(req, owner) {
+    const decoded = decodeHeader(req);
   },
 }
 
 function getToken(auth) {
-  if (auth) {
-    throw error('No viene el token', 401);
+  if (!auth) {
+    throw error('No viene token', 401);
   }
 
-  if (auth.indexOf('Bearer') === -1) {
-    throw error('Formato inválido', 401);
+  if (auth.indexOf('Bearer ') === -1) {
+    throw error('Formato invalido', 401);
   }
 
-  let token = auth.replace("Bearer", "");
+  let token = auth.replace('Bearer ', '');
   return token;
 }
 
-function decodedHeader(req) {
+function decodeHeader(req) {
   const authorization = req.headers.authorization || '';
   const token = getToken(authorization);
   const decoded = verify(token);
 
   req.user = decoded;
+
   return decoded;
 }
 
