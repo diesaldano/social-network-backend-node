@@ -4,7 +4,7 @@ function createRemoteDB(host, port){
 	const URL = 'https'+host+':'+port;
 	
 	function list(table){
-			return require('GET', table);
+			return req('GET', table);
 	}
 
 	function req(methos, table, data){
