@@ -1,0 +1,39 @@
+{
+	"version": 2,
+		"env": {
+			"NODE_ENV":	"production",
+			"MYSQL_HOST": "remotemysql.com",
+			"MYSQL_USER": "m0iQxHsDh2",
+			"MYSQL_PASS": "BgoJMG0yXK",
+			"MYSQL_DB": "m0iQxHsDh2",
+			"MYSQL_SRV_PORT": "3001",
+			"POST_PORT": "3005",
+			"JWT_SECRET": "Secret!",
+			"REMOTE_DB": "false",
+			"API_PORT": "3004"			
+		},
+    "builds": [
+			{
+				"src": "api/index.js",
+				"use": "@vercel/node"
+			},
+			{
+				"src": "post/index.js",
+				"use": "@vercel/node"
+			}
+    ],
+	"routes": [
+		{
+			"src": "/api/auth(.*)",
+			"dest": "/api/index.js"
+		},
+		{
+			"src": "/api/user(.*)",
+			"dest": "/api/index.js"
+		},
+		{
+			"src": "/api/post(.*)",
+			"dest": "/post/index.js"
+		}
+	]
+}
