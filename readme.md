@@ -1,3 +1,24 @@
+## AUTH
+
+Anatomía de un JWT
+JWT es un estándar de la industria que nos permite manejar demandas de información entre dos clientes.
+.
+Un JSON Web Token es un estandar que nos permite generar demandas entre 2 clientes de manera segura.
+Un JWT está encriptado, pero tiene 3 partes principales divididas por “.” (punto)
+
+Header: Contiene los archivos de configuración (el tipo y el algoritmo de encriptación)
+Payload: Guarda la información de nuestros usuarios
+Signature: es la firma que contiene el header códificado más el payload códificado, para poder dar acceso a un contenido, éste deberá de ser firmado con un secret, que es la clave secreta con la que se firman los tokens, misma que sólo la deberá de conocer el backend.
+Dentro del payload tenemos información que puede ser relevante para la autorización tal como:
+
+La expiración
+Id’s
+Nombres
+etc
+.
+Es importante saber que los JWT acabarán firmando mucha parte de la comunicación, por lo que no es recomendable que mucha información viaje, ésto puede acabar alentando tu aplicación.
+
+
 ##Data base. 
 Archivo config tiene las credenciales para la db de desarrollo que estamos trabajando.
 
@@ -33,4 +54,16 @@ Para las variables de entorno utilizamos los SECRETS -> https://vercel.com/docs/
 Alternative: `dotenv`
 
 ## Catching - caché
-Definición: El Cache es una forma más rápida de servir contenido que ya conocemos.
+Definición: El Cache es una forma más rápida de servir contenido que ya conocemos. Cada vez que mi API solicite data, primero revisa en redis, si está allí la trae, si no entonces va y la trae de mysql.
+Creamos una cuenta en `https://redislabs.com/` -  creamos una db en Redis.
+Instalamos `yarn add redis`
+
+## Conectar la api al cache
+
+
+## nginx 
+sudo apt-get install nginx
+sudo service nginx start
+sudo service nginx stop
+
+sudo nano /etc/nginx/service/
