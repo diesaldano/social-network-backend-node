@@ -57,28 +57,33 @@ function get(table, id) {
 }
 /** Insert in data */
 function insert(table, data) {
+  console.log('insert desde mysql file', table, data)
   return new Promise((resolve, reject) => {
-      connection.query(`INSERT INTO ${table} SET ?`, data, (err, result) => {
-          if (err) return reject(err);
-          resolve(result);
-      })
+    connection.query(`INSERT INTO ${table} SET ?`, data, (err, result) => {
+      if (err) return reject(err);
+      console.log('log desde mysql insert ',result)
+      resolve(result);
+    })
   })
 }
+
 
 /**Actualizar db */
 function update(table, data) {
   return new Promise((resolve, reject) => {
     connection.query(`UPDATE ${table} SET ? WHERE id=?`, [data, data.id], (err, result) => {
-        if (err) return reject(err);
-        resolve(result);
+      if (err) return reject(err);
+      resolve(result);
     })
   })
 }
 
 function upsert(table, data) {
-  if (data && data.id) {
+  if (!data && !data.id) {
+    console.log('upsert con update ', table, data)
       return update(table, data);
   } else {
+    console.log('upsert con insert ', table, data)
       return insert(table, data);
   }
 }

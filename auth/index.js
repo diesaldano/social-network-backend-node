@@ -36,11 +36,11 @@ function getToken(auth) {
     throw error('No viene token', 401);
   }
 
-  if (auth.indexOf('Bearer ') === -1) {
+  if (auth.indexOf('Bearer') === -1) {
     throw error('Formato invalido', 401);
   }
 
-  let token = auth.replace('Bearer ', '');
+  let token = auth.replace('Bearer', '');
   return token;
 }
 
